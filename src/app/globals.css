@@ -6,36 +6,51 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+  --font-sans: "Inter", sans-serif;
   --font-mono: "Geist Mono", monospace;
-  --font-heading: "Cabinet Grotesk", sans-serif;
-  --font-serif: "Instrument Serif", serif;
+  --font-heading: "Syne", sans-serif;
   
-  /* PANORA Dark Theme Colors */
-  --color-bg: #070a0f;
-  --color-s1: #0c1018;
-  --color-s2: #111820;
-  --color-s3: #182030;
-  --color-s4: #1e2838;
-  --color-border-custom: rgba(100, 160, 255, 0.1);
-  --color-border-hi: rgba(100, 160, 255, 0.22);
-  --color-lime: #a8ff3e;
-  --color-lime-dim: rgba(168, 255, 62, 0.1);
-  --color-cyan: #38d9f5;
-  --color-cyan-dim: rgba(56, 217, 245, 0.1);
-  --color-blue: #4a8eff;
-  --color-blue-dim: rgba(74, 142, 255, 0.1);
-  --color-amber: #ffb830;
-  --color-amber-dim: rgba(255, 184, 48, 0.1);
-  --color-red: #ff4560;
-  --color-red-dim: rgba(255, 69, 96, 0.1);
-  --color-green: #2edc7a;
-  --color-green-dim: rgba(46, 220, 122, 0.1);
-  --color-purple: #c47aff;
-  --color-purple-dim: rgba(196, 122, 255, 0.1);
-  --color-text: #d0dff0;
-  --color-muted-text: #5a7090;
-  --color-faint: rgba(208, 223, 240, 0.25);
+  /* PANORA Design System Colors */
+  /* Primary Base / Canvas (90%) */
+  --color-pure-horizon: #F9FAFB;
+  
+  /* Secondary Base / UI */
+  --color-frosted-glass: #F3F4F6;
+  
+  /* Primary Accent / Logo & Alerts */
+  --color-solar-flare: #FF6B00;
+  
+  /* Text / Anchor */
+  --color-deep-obsidian: #111827;
+  
+  /* Highlight - Data viz only */
+  --color-electric-teal: #00D1FF;
+  
+  /* Legacy colors for compatibility */
+  --color-bg: #F9FAFB;
+  --color-s1: #FFFFFF;
+  --color-s2: #F3F4F6;
+  --color-s3: #E5E7EB;
+  --color-s4: #D1D5DB;
+  --color-border-custom: #111827;
+  --color-border-hi: rgba(17, 24, 39, 0.15);
+  --color-lime: #00D1FF;
+  --color-lime-dim: rgba(0, 209, 255, 0.1);
+  --color-cyan: #00D1FF;
+  --color-cyan-dim: rgba(0, 209, 255, 0.1);
+  --color-blue: #111827;
+  --color-blue-dim: rgba(17, 24, 39, 0.1);
+  --color-amber: #FF6B00;
+  --color-amber-dim: rgba(255, 107, 0, 0.1);
+  --color-red: #FF6B00;
+  --color-red-dim: rgba(255, 107, 0, 0.1);
+  --color-green: #00D1FF;
+  --color-green-dim: rgba(0, 209, 255, 0.1);
+  --color-purple: #111827;
+  --color-purple-dim: rgba(17, 24, 39, 0.1);
+  --color-text: #111827;
+  --color-muted-text: #6B7280;
+  --color-faint: rgba(17, 24, 39, 0.25);
   
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -66,80 +81,46 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
 }
 
 :root {
-  --background: #070a0f;
-  --foreground: #d0dff0;
-  --card: #111820;
-  --card-foreground: #d0dff0;
-  --popover: #111820;
-  --popover-foreground: #d0dff0;
-  --primary: #a8ff3e;
-  --primary-foreground: #070a0f;
-  --secondary: #182030;
-  --secondary-foreground: #d0dff0;
-  --muted: #182030;
-  --muted-foreground: #5a7090;
-  --accent: #182030;
-  --accent-foreground: #d0dff0;
-  --destructive: #ff4560;
-  --border: rgba(100, 160, 255, 0.1);
-  --input: rgba(100, 160, 255, 0.1);
-  --ring: #a8ff3e;
-  --chart-1: #a8ff3e;
-  --chart-2: #38d9f5;
-  --chart-3: #ffb830;
-  --chart-4: #ff4560;
-  --chart-5: #c47aff;
-  --radius: 0.625rem;
-  --sidebar: #0c1018;
-  --sidebar-foreground: #d0dff0;
-  --sidebar-primary: #a8ff3e;
-  --sidebar-primary-foreground: #070a0f;
-  --sidebar-accent: #182030;
-  --sidebar-accent-foreground: #d0dff0;
-  --sidebar-border: rgba(100, 160, 255, 0.1);
-  --sidebar-ring: #a8ff3e;
-}
-
-.dark {
-  --background: #070a0f;
-  --foreground: #d0dff0;
-  --card: #111820;
-  --card-foreground: #d0dff0;
-  --popover: #111820;
-  --popover-foreground: #d0dff0;
-  --primary: #a8ff3e;
-  --primary-foreground: #070a0f;
-  --secondary: #182030;
-  --secondary-foreground: #d0dff0;
-  --muted: #182030;
-  --muted-foreground: #5a7090;
-  --accent: #182030;
-  --accent-foreground: #d0dff0;
-  --destructive: #ff4560;
-  --border: rgba(100, 160, 255, 0.1);
-  --input: rgba(100, 160, 255, 0.1);
-  --ring: #a8ff3e;
-  --chart-1: #a8ff3e;
-  --chart-2: #38d9f5;
-  --chart-3: #ffb830;
-  --chart-4: #ff4560;
-  --chart-5: #c47aff;
-  --sidebar: #0c1018;
-  --sidebar-foreground: #d0dff0;
-  --sidebar-primary: #a8ff3e;
-  --sidebar-primary-foreground: #070a0f;
-  --sidebar-accent: #182030;
-  --sidebar-accent-foreground: #d0dff0;
-  --sidebar-border: rgba(100, 160, 255, 0.1);
-  --sidebar-ring: #a8ff3e;
+  --background: #F9FAFB;
+  --foreground: #111827;
+  --card: #FFFFFF;
+  --card-foreground: #111827;
+  --popover: #FFFFFF;
+  --popover-foreground: #111827;
+  --primary: #111827;
+  --primary-foreground: #F9FAFB;
+  --secondary: #F3F4F6;
+  --secondary-foreground: #111827;
+  --muted: #F3F4F6;
+  --muted-foreground: #6B7280;
+  --accent: #00D1FF;
+  --accent-foreground: #111827;
+  --destructive: #FF6B00;
+  --border: #111827;
+  --input: #E5E7EB;
+  --ring: #111827;
+  --chart-1: #00D1FF;
+  --chart-2: #111827;
+  --chart-3: #FF6B00;
+  --chart-4: #6B7280;
+  --chart-5: #F3F4F6;
+  --radius: 0px;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #111827;
+  --sidebar-primary: #111827;
+  --sidebar-primary-foreground: #F9FAFB;
+  --sidebar-accent: #F3F4F6;
+  --sidebar-accent-foreground: #111827;
+  --sidebar-border: #111827;
+  --sidebar-ring: #111827;
 }
 
 @layer base {
@@ -148,24 +129,34 @@
   }
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: "Cabinet Grotesk", sans-serif;
+    font-family: "Inter", sans-serif;
   }
   html {
     @apply font-sans;
   }
 }
 
-/* Custom Utilities */
+/* Typography */
 .font-mono {
   font-family: "Geist Mono", monospace;
 }
 
 .font-heading {
-  font-family: "Cabinet Grotesk", sans-serif;
+  font-family: "Syne", sans-serif;
+  font-weight: 700;
 }
 
-.font-serif {
-  font-family: "Instrument Serif", serif;
+.font-sans {
+  font-family: "Inter", sans-serif;
+}
+
+/* Grid Background - Graph Paper Style */
+.grid-background {
+  background-color: #F9FAFB;
+  background-image: 
+    linear-gradient(rgba(17, 24, 39, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 24, 39, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
 /* Animations */
@@ -204,19 +195,53 @@
 
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #F3F4F6;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e2838;
-  border-radius: 2px;
+  background: #D1D5DB;
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(100, 160, 255, 0.22);
+  background: #9CA3AF;
+}
+
+/* Status Indicators */
+.status-aktif {
+  color: #00D1FF;
+}
+
+.status-pending {
+  color: #FF6B00;
+}
+
+.status-bermasalah {
+  color: #FF6B00;
+}
+
+.status-selesai {
+  color: #111827;
+}
+
+/* Table Alternating Rows */
+.table-row-alt {
+  background-color: #F3F4F6;
+}
+
+/* Thin borders */
+.border-thin {
+  border-width: 1px;
+  border-color: #111827;
+}
+
+/* Focus states */
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(17, 24, 39, 0.1);
 }

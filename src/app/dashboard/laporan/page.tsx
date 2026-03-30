@@ -1,93 +1,87 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ChartCard } from "@/components/dashboard/ChartCard";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 const generateButtons = [
   {
-    icon: "📋",
-    title: "Laporan Ketahanan Pangan",
-    subtitle: "Kementan · Bulanan · Juli 2025",
-    action: "Generate PDF",
+    icon: "▤",
+    title: "laporan ketahanan pangan",
+    subtitle: "kementan · bulanan · juli 2025",
+    action: "generate PDF",
     primary: true,
   },
   {
-    icon: "🔍",
-    title: "Laporan Audit Subsidi",
-    subtitle: "BPKP · Kuartalan · Q2 2025",
-    action: "Generate PDF",
+    icon: "◉",
+    title: "laporan audit subsidi",
+    subtitle: "BPKP · kuartalan · Q2 2025",
+    action: "generate PDF",
     primary: true,
   },
   {
-    icon: "📊",
-    title: "Data Produksi Komoditas",
-    subtitle: "BPS · Tahunan · 2025",
-    action: "Generate PDF",
+    icon: "▦",
+    title: "data produksi komoditas",
+    subtitle: "BPS · tahunan · 2025",
+    action: "generate PDF",
     primary: true,
   },
   {
-    icon: "⛓",
-    title: "Blockchain Audit Trail",
-    subtitle: "Semua transaksi · CSV · Immutable",
-    action: "Export CSV",
+    icon: "∞",
+    title: "blockchain audit trail",
+    subtitle: "semua transaksi · CSV · immutable",
+    action: "export CSV",
     primary: false,
   },
 ];
 
 const recentReports = [
-  { name: "Ketahanan Pangan", period: "Jun 2025", created: "1 Jul", status: "Terkirim", statusColor: "lime" },
-  { name: "Audit Subsidi", period: "Q1 2025", created: "2 Apr", status: "Terkirim", statusColor: "lime" },
-  { name: "Data Produksi", period: "2024", created: "15 Jan", status: "Terkirim", statusColor: "lime" },
-  { name: "Audit Keuangan", period: "Mei 2025", created: "3 Jun", status: "Review", statusColor: "cyan" },
-  { name: "Distribusi Logistik", period: "Jun 2025", created: "5 Jul", status: "Draft", statusColor: "amber" },
+  { name: "ketahanan pangan", period: "jun 2025", created: "1 jul", status: "terkirim", statusColor: "teal" },
+  { name: "audit subsidi", period: "Q1 2025", created: "2 apr", status: "terkirim", statusColor: "teal" },
+  { name: "data produksi", period: "2024", created: "15 jan", status: "terkirim", statusColor: "teal" },
+  { name: "audit keuangan", period: "mei 2025", created: "3 jun", status: "review", statusColor: "neutral" },
+  { name: "distribusi logistik", period: "jun 2025", created: "5 jul", status: "draft", statusColor: "orange" },
 ];
 
-const badgeStyles: Record<string, string> = {
-  lime: "bg-[rgba(168,255,62,0.1)] text-[#a8ff3e] border-[rgba(168,255,62,0.25)]",
-  cyan: "bg-[rgba(56,217,245,0.1)] text-[#38d9f5] border-[rgba(56,217,245,0.25)]",
-  amber: "bg-[rgba(255,184,48,0.1)] text-[#ffb830] border-[rgba(255,184,48,0.25)]",
+const badgeStyles = {
+  teal: "bg-[rgba(0,209,255,0.1)] text-[#00D1FF] border-[#111827]",
+  neutral: "bg-[#F3F4F6] text-[#111827] border-[#111827]",
+  orange: "bg-[rgba(255,107,0,0.1)] text-[#FF6B00] border-[#111827]",
 };
 
 export default function LaporanPage() {
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="font-mono text-[9px] tracking-[0.22em] uppercase text-[#5a7090] mb-1.5">
-          // Kementan · BPKP · BPS
+      <div>
+        <div className="font-mono text-[10px] tracking-[0.15em] text-[#6B7280] mb-1">
+          kementan · BPKP · BPS
         </div>
-        <h1 className="font-serif italic text-[28px] text-[#d0dff0] mb-1">
-          Laporan <span className="not-italic font-heading font-black text-[#a8ff3e]">Regulasi</span>
+        <h1 className="font-heading text-[28px] text-[#111827] mb-1 tracking-tight">
+          laporan <span className="text-[#00D1FF]">regulasi</span>
         </h1>
-        <p className="text-[13px] text-[#5a7090]">
-          Generate laporan on-chain untuk Kementan, BPKP, dan BPS · Data immutable dari Solana blockchain
+        <p className="text-[13px] text-[#6B7280]">
+          generate laporan on-chain untuk kementan, BPKP, dan BPS · data immutable dari solana blockchain
         </p>
-      </motion.div>
+      </div>
 
       {/* Content */}
       <div className="grid grid-cols-2 gap-4">
         {/* Generate Reports */}
-        <ChartCard title="Generate Laporan Otomatis">
+        <ChartCard title="generate laporan otomatis">
           <div className="p-4 space-y-2.5">
             {generateButtons.map((item, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="flex items-center justify-between p-3.5 bg-[#182030] border border-[rgba(100,160,255,0.1)] rounded-lg cursor-pointer hover:border-[rgba(100,160,255,0.22)] transition-colors"
+                className="flex items-center justify-between p-3.5 bg-[#F9FAFB] border border-[#E5E7EB] cursor-pointer hover:border-[#111827] transition-colors"
               >
                 <div>
-                  <div className="text-xs font-bold text-[#d0dff0] mb-0.5">
-                    {item.icon} {item.title}
+                  <div className="text-xs font-medium text-[#111827] mb-0.5 flex items-center gap-2">
+                    <span className="text-[#6B7280]">{item.icon}</span> {item.title}
                   </div>
-                  <div className="text-[11px] text-[#5a7090]">
+                  <div className="text-[11px] text-[#6B7280]">
                     {item.subtitle}
                   </div>
                 </div>
@@ -95,41 +89,44 @@ export default function LaporanPage() {
                   variant={item.primary ? "default" : "outline"}
                   size="sm"
                   className={item.primary 
-                    ? "bg-[#a8ff3e] text-[#070a0f] hover:bg-[#c8ff5e] font-bold text-[11px] h-7 px-4 border-0"
-                    : "bg-transparent border-[rgba(100,160,255,0.22)] hover:bg-[#182030] text-[11px] h-7 px-4"
+                    ? "bg-[#111827] text-[#F9FAFB] hover:bg-[#111827]/90 font-medium text-[11px] h-7 px-4 rounded-none"
+                    : "bg-transparent border-[#111827] hover:bg-[#F3F4F6] text-[11px] h-7 px-4 rounded-none"
                   }
                 >
                   {item.action}
                 </Button>
-              </motion.div>
+              </div>
             ))}
           </div>
         </ChartCard>
 
         {/* Recent Reports */}
-        <ChartCard title="Laporan Terakhir Digenerate">
+        <ChartCard title="laporan terakhir digenerate">
           <Table>
             <TableHeader>
-              <TableRow className="border-b border-[rgba(100,160,255,0.1)] hover:bg-transparent">
-                <TableHead className="font-mono text-[9px] tracking-[0.15em] uppercase text-[#5a7090] font-normal">Laporan</TableHead>
-                <TableHead className="font-mono text-[9px] tracking-[0.15em] uppercase text-[#5a7090] font-normal">Periode</TableHead>
-                <TableHead className="font-mono text-[9px] tracking-[0.15em] uppercase text-[#5a7090] font-normal">Dibuat</TableHead>
-                <TableHead className="font-mono text-[9px] tracking-[0.15em] uppercase text-[#5a7090] font-normal">Status</TableHead>
+              <TableRow className="border-b border-[#111827] hover:bg-transparent">
+                <TableHead className="font-mono text-[10px] tracking-[0.1em] text-[#6B7280] font-normal">laporan</TableHead>
+                <TableHead className="font-mono text-[10px] tracking-[0.1em] text-[#6B7280] font-normal">periode</TableHead>
+                <TableHead className="font-mono text-[10px] tracking-[0.1em] text-[#6B7280] font-normal">dibuat</TableHead>
+                <TableHead className="font-mono text-[10px] tracking-[0.1em] text-[#6B7280] font-normal">status</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {recentReports.map((report, index) => (
+              {recentReports.map((report, idx) => (
                 <TableRow 
-                  key={index}
-                  className="border-b border-[rgba(100,160,255,0.1)] hover:bg-white/[0.02] transition-colors cursor-pointer"
+                  key={idx}
+                  className={cn(
+                    "border-b border-[#E5E7EB] hover:bg-[#F3F4F6] transition-colors cursor-pointer",
+                    idx % 2 === 1 ? "bg-[#F9FAFB]" : "bg-white"
+                  )}
                 >
-                  <TableCell className="text-xs font-semibold text-[#d0dff0]">{report.name}</TableCell>
-                  <TableCell className="font-mono text-xs text-[#d0dff0]">{report.period}</TableCell>
-                  <TableCell className="font-mono text-xs text-[#d0dff0]">{report.created}</TableCell>
+                  <TableCell className="text-xs font-medium text-[#111827]">{report.name}</TableCell>
+                  <TableCell className="font-mono text-xs text-[#111827]">{report.period}</TableCell>
+                  <TableCell className="font-mono text-xs text-[#111827]">{report.created}</TableCell>
                   <TableCell>
-                    <span className={`inline-flex items-center px-2 py-0.5 rounded text-[9px] font-medium border ${badgeStyles[report.statusColor]}`}>
+                    <Badge variant="outline" className={`${badgeStyles[report.statusColor as keyof typeof badgeStyles]} rounded-none text-[9px]`}>
                       {report.status}
-                    </span>
+                    </Badge>
                   </TableCell>
                 </TableRow>
               ))}
@@ -137,14 +134,14 @@ export default function LaporanPage() {
           </Table>
 
           {/* Solana Proof of Audit */}
-          <div className="p-4 border-t border-[rgba(100,160,255,0.1)]">
-            <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-[#5a7090] mb-2.5">
-              Solana Proof of Audit
+          <div className="p-4 border-t border-[#E5E7EB]">
+            <div className="font-mono text-[9px] tracking-[0.1em] uppercase text-[#6B7280] mb-2.5">
+              solana proof of audit
             </div>
-            <div className="bg-[#182030] rounded-md p-3 font-mono text-[10px] text-[#5a7090] leading-relaxed">
-              Root Hash: <span className="text-[#9945ff]">a8f3...d12e</span><br />
-              Block: <span className="text-[#a8ff3e]">284,720,001 – 284,751,033</span><br />
-              Verified: <span className="text-[#2edc7a]">✓ Immutable on Solana Mainnet</span>
+            <div className="bg-[#F3F4F6] p-3 font-mono text-[10px] text-[#6B7280] leading-relaxed border border-[#E5E7EB]">
+              root hash: <span className="text-[#111827]">a8f3...d12e</span><br />
+              block: <span className="text-[#111827]">284,720,001 – 284,751,033</span><br />
+              verified: <span className="text-[#00D1FF]">✓ immutable on solana mainnet</span>
             </div>
           </div>
         </ChartCard>

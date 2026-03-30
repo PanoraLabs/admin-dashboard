@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { KPICard } from "@/components/dashboard/KPICard";
 import { ChartCard } from "@/components/dashboard/ChartCard";
 import { Badge } from "@/components/ui/badge";
@@ -10,16 +9,15 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { cn } from "@/lib/utils";
 
 const kpiData = [
-  { tag: "Total Pengguna", value: "203,840", label: "Petani + Koperasi + Transporter", color: "lime" as const },
-  { tag: "KYC Terverifikasi", value: "198,204", label: "97.2% dari total pengguna", color: "green" as const },
-  { tag: "Antrian Verifikasi", value: "12", label: "Butuh review manual", color: "red" as const },
+  { tag: "total pengguna", value: "203,840", label: "petani + koperasi + transporter", color: "neutral" as const },
+  { tag: "KYC terverifikasi", value: "198,204", label: "97.2% dari total pengguna", color: "teal" as const },
+  { tag: "antrian verifikasi", value: "12", label: "butuh review manual", color: "orange" as const },
 ];
 
 interface KYCItem {
   id: number;
   name: string;
   initial: string;
-  gradient: string;
   type: string;
   location: string;
   documents: string;
@@ -27,25 +25,25 @@ interface KYCItem {
 }
 
 const initialQueue: KYCItem[] = [
-  { id: 1, name: "Ahmad Fauzi", initial: "A", gradient: "from-[#38d9f5] to-[#1a7ab8]", type: "Petani", location: "Kulon Progo, DIY", documents: "NIK 34.02.xxx · KTP + Surat Tanah tersedia", status: "pending" },
-  { id: 2, name: "Surya Logistics CV", initial: "S", gradient: "from-[#ffb830] to-[#b87820]", type: "Transporter", location: "Semarang", documents: "SIUP + STNK 3 armada tersedia", status: "pending" },
-  { id: 3, name: "KUD Baru Makmur", initial: "K", gradient: "from-[#c47aff] to-[#6a40c0]", type: "Koperasi", location: "Blora, Jateng", documents: "Akta notaris + SK Kemenkop · 84 anggota", status: "pending" },
-  { id: 4, name: "Rini Widiastuti", initial: "R", gradient: "from-[#2edc7a] to-[#1a6a3a]", type: "Petani", location: "Sleman, DIY", documents: "NIK belum terverifikasi Dukcapil", status: "pending" },
+  { id: 1, name: "ahmad fauzi", initial: "A", type: "petani", location: "kulon progo, DIY", documents: "NIK 34.02.xxx · KTP + surat tanah tersedia", status: "pending" },
+  { id: 2, name: "surya logistics CV", initial: "S", type: "transporter", location: "semarang", documents: "SIUP + STNK 3 armada tersedia", status: "pending" },
+  { id: 3, name: "KUD baru makmur", initial: "K", type: "koperasi", location: "blora, jateng", documents: "akta notaris + SK kemenkop · 84 anggota", status: "pending" },
+  { id: 4, name: "rini widiastuti", initial: "R", type: "petani", location: "sleman, DIY", documents: "NIK belum terverifikasi dukcapil", status: "pending" },
 ];
 
 const userDistribution = [
-  { label: "🌾 Petani", count: "180,294", percentage: "88.5%", color: "#a8ff3e", width: "88%" },
-  { label: "🏛 Koperasi/Gudang", count: "14,820", percentage: "7.3%", color: "#38d9f5", width: "7%" },
-  { label: "🚛 Transporter", count: "5,420", percentage: "2.7%", color: "#ffb830", width: "3%" },
-  { label: "🏢 Pembeli B2B", count: "3,306", percentage: "1.5%", color: "#c47aff", width: "2%" },
+  { label: "petani", count: "180,294", percentage: "88.5%", color: "#111827", width: "88%" },
+  { label: "koperasi/gudang", count: "14,820", percentage: "7.3%", color: "#00D1FF", width: "7%" },
+  { label: "transporter", count: "5,420", percentage: "2.7%", color: "#FF6B00", width: "3%" },
+  { label: "pembeli B2B", count: "3,306", percentage: "1.5%", color: "#6B7280", width: "2%" },
 ];
 
 const kycByRegion = [
-  { region: "Jawa", total: "142,800", kyc: "140,200", rate: "98.2%", rateColor: "#2edc7a" },
-  { region: "Sumatera", total: "38,400", kyc: "36,800", rate: "95.8%", rateColor: "#2edc7a" },
-  { region: "Sulawesi", total: "14,200", kyc: "12,800", rate: "90.1%", rateColor: "#ffb830" },
-  { region: "Kalimantan", total: "6,840", kyc: "6,204", rate: "90.7%", rateColor: "#ffb830" },
-  { region: "Papua", total: "1,600", kyc: "1,200", rate: "75.0%", rateColor: "#ff4560" },
+  { region: "jawa", total: "142,800", kyc: "140,200", rate: "98.2%", rateColor: "#111827" },
+  { region: "sumatera", total: "38,400", kyc: "36,800", rate: "95.8%", rateColor: "#111827" },
+  { region: "sulawesi", total: "14,200", kyc: "12,800", rate: "90.1%", rateColor: "#FF6B00" },
+  { region: "kalimantan", total: "6,840", kyc: "6,204", rate: "90.7%", rateColor: "#FF6B00" },
+  { region: "papua", total: "1,600", kyc: "1,200", rate: "75.0%", rateColor: "#FF6B00" },
 ];
 
 export default function KYCVerificationPage() {
@@ -64,26 +62,22 @@ export default function KYCVerificationPage() {
   };
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="font-mono text-[9px] tracking-[0.22em] uppercase text-[#5a7090] mb-1.5">
-          // Identity Verification Queue
+      <div>
+        <div className="font-mono text-[10px] tracking-[0.15em] text-[#6B7280] mb-1">
+          identity verification queue
         </div>
-        <h1 className="font-serif italic text-[28px] text-[#d0dff0] mb-1">
-          Verifikasi <span className="not-italic font-heading font-black text-[#a8ff3e]">KYC Pengguna</span>
+        <h1 className="font-heading text-[28px] text-[#111827] mb-1 tracking-tight">
+          verifikasi <span className="text-[#00D1FF]">KYC pengguna</span>
         </h1>
-        <p className="text-[13px] text-[#5a7090]">
-          12 pending · Solana Mobile Stack identity · Document verification required
+        <p className="text-[13px] text-[#6B7280]">
+          12 pending · solana mobile stack identity · document verification required
         </p>
-      </motion.div>
+      </div>
 
       {/* KPI Row */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-3 gap-4">
         {kpiData.map((kpi, index) => (
           <KPICard
             key={index}
@@ -96,33 +90,31 @@ export default function KYCVerificationPage() {
       {/* KYC Queue + Distribution */}
       <div className="grid grid-cols-[2fr_3fr] gap-4">
         {/* KYC Queue */}
-        <ChartCard title="Antrian KYC — Review Manual" action={<Badge variant="outline" className="bg-[rgba(255,69,96,0.1)] text-[#ff4560] border-[rgba(255,69,96,0.25)]">12 Pending</Badge>}>
+        <ChartCard title="antrian KYC — review manual" action={<Badge variant="outline" className="bg-[rgba(255,107,0,0.1)] text-[#FF6B00] border-[#111827] rounded-none">12 pending</Badge>}>
           <div className="space-y-0">
-            {queue.map((item) => (
-              <motion.div
+            {queue.map((item, idx) => (
+              <div
                 key={item.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
                 className={cn(
-                  "flex items-center gap-3 px-3.5 py-3 border-b border-[rgba(100,160,255,0.1)] last:border-b-0 cursor-pointer hover:bg-[#182030] transition-all",
-                  item.status === "approved" && "opacity-50",
+                  "flex items-center gap-3 px-3.5 py-3 border-b border-[#E5E7EB] last:border-b-0 cursor-pointer hover:bg-[#F3F4F6] transition-all",
+                  idx % 2 === 1 ? "bg-[#F9FAFB]" : "bg-white",
+                  item.status === "approved" && "opacity-60",
                   item.status === "rejected" && "opacity-40"
                 )}
               >
                 <div className={cn(
-                  "w-8 h-8 rounded-lg flex items-center justify-center text-[13px] font-extrabold text-white flex-shrink-0 bg-gradient-to-br",
-                  item.gradient
+                  "w-8 h-8 flex items-center justify-center text-[13px] font-bold text-white flex-shrink-0 bg-[#111827]"
                 )}>
                   {item.initial}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className={cn(
-                    "text-xs font-semibold text-[#d0dff0]",
+                    "text-xs font-semibold text-[#111827]",
                     item.status === "approved" && "line-through"
                   )}>
                     {item.name}
                   </div>
-                  <div className="text-[10px] text-[#5a7090] truncate">
+                  <div className="text-[10px] text-[#6B7280] truncate">
                     {item.type} · {item.location} · {item.documents}
                   </div>
                 </div>
@@ -130,54 +122,54 @@ export default function KYCVerificationPage() {
                   <Button
                     size="sm"
                     className={cn(
-                      "h-6 px-3 text-[10px] font-bold",
+                      "h-6 px-3 text-[10px] font-medium rounded-none",
                       item.status === "approved" 
-                        ? "bg-[#2edc7a] text-[#070a0f] hover:bg-[#2edc7a]" 
-                        : "bg-[rgba(46,220,122,0.1)] text-[#2edc7a] border border-[rgba(46,220,122,0.3)] hover:bg-[#2edc7a] hover:text-[#070a0f]"
+                        ? "bg-[#111827] text-[#F9FAFB] hover:bg-[#111827]" 
+                        : "bg-[rgba(0,209,255,0.1)] text-[#00D1FF] border border-[#111827] hover:bg-[#00D1FF] hover:text-white"
                     )}
                     onClick={() => handleApprove(item.id)}
                     disabled={item.status !== "pending"}
                   >
-                    {item.status === "approved" ? "✓ Disetujui" : "✓ Setujui"}
+                    {item.status === "approved" ? "✓ disetujui" : "✓ setujui"}
                   </Button>
                   <Button
                     size="sm"
                     variant="outline"
                     className={cn(
-                      "h-6 px-2.5 text-[10px] font-bold",
+                      "h-6 px-2.5 text-[10px] font-medium rounded-none",
                       item.status === "rejected"
-                        ? "bg-[#ff4560] text-white hover:bg-[#ff4560]"
-                        : "bg-[rgba(255,69,96,0.1)] text-[#ff4560] border-[rgba(255,69,96,0.25)] hover:bg-[#ff4560] hover:text-white"
+                        ? "bg-[#FF6B00] text-white hover:bg-[#FF6B00]"
+                        : "bg-[rgba(255,107,0,0.1)] text-[#FF6B00] border-[#111827] hover:bg-[#FF6B00] hover:text-white"
                     )}
                     onClick={() => handleReject(item.id)}
                     disabled={item.status !== "pending"}
                   >
-                    {item.status === "rejected" ? "✗ Ditolak" : "✗ Tolak"}
+                    {item.status === "rejected" ? "✗ ditolak" : "✗ tolak"}
                   </Button>
                 </div>
-              </motion.div>
+              </div>
             ))}
-            <div className="px-3.5 py-3 font-mono text-[10px] text-[#5a7090] text-center cursor-pointer hover:text-[#a8ff3e] transition-colors border-t border-[rgba(100,160,255,0.1)]">
+            <div className="px-3.5 py-3 font-mono text-[10px] text-[#6B7280] text-center cursor-pointer hover:text-[#00D1FF] transition-colors border-t border-[#E5E7EB]">
               + 8 antrian lainnya →
             </div>
           </div>
         </ChartCard>
 
         {/* Distribution */}
-        <ChartCard title="Distribusi Pengguna">
+        <ChartCard title="distribusi pengguna">
           <div className="p-4 space-y-3">
             {userDistribution.map((item, index) => (
               <div key={index}>
                 <div className="flex justify-between mb-1">
-                  <span className="text-xs font-semibold text-[#d0dff0]">{item.label}</span>
-                  <span className="font-mono text-[10px] text-[#5a7090]">{item.count} · {item.percentage}</span>
+                  <span className="text-xs font-medium text-[#111827]">{item.label}</span>
+                  <span className="font-mono text-[10px] text-[#6B7280]">{item.count} · {item.percentage}</span>
                 </div>
-                <div className="h-1.5 bg-[#1e2838] rounded-full overflow-hidden">
+                <div className="h-1.5 bg-[#E5E7EB] overflow-hidden">
                   <div 
-                    className="h-full rounded-full"
+                    className="h-full"
                     style={{ 
                       width: item.width,
-                      background: `linear-gradient(90deg, ${item.color}, ${index === 0 ? '#2edc7a' : index === 1 ? '#4a8eff' : index === 2 ? '#b87820' : '#7a40c0'})`
+                      background: item.color
                     }}
                   />
                 </div>
@@ -185,29 +177,32 @@ export default function KYCVerificationPage() {
             ))}
 
             {/* KYC Rate by Region */}
-            <div className="mt-5 pt-4 border-t border-[rgba(100,160,255,0.1)]">
-              <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-[#5a7090] mb-3">
-                KYC Rate per Wilayah
+            <div className="mt-5 pt-4 border-t border-[#E5E7EB]">
+              <div className="font-mono text-[9px] tracking-[0.1em] uppercase text-[#6B7280] mb-3">
+                KYC rate per wilayah
               </div>
               <Table>
                 <TableHeader>
-                  <TableRow className="border-b border-[rgba(100,160,255,0.1)] hover:bg-transparent">
-                    <TableHead className="font-mono text-[9px] text-[#5a7090] font-normal">Wilayah</TableHead>
-                    <TableHead className="font-mono text-[9px] text-[#5a7090] font-normal">Total</TableHead>
-                    <TableHead className="font-mono text-[9px] text-[#5a7090] font-normal">KYC ✓</TableHead>
-                    <TableHead className="font-mono text-[9px] text-[#5a7090] font-normal">Rate</TableHead>
+                  <TableRow className="border-b border-[#111827] hover:bg-transparent">
+                    <TableHead className="font-mono text-[10px] text-[#6B7280] font-normal">wilayah</TableHead>
+                    <TableHead className="font-mono text-[10px] text-[#6B7280] font-normal">total</TableHead>
+                    <TableHead className="font-mono text-[10px] text-[#6B7280] font-normal">KYC ✓</TableHead>
+                    <TableHead className="font-mono text-[10px] text-[#6B7280] font-normal">rate</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {kycByRegion.map((region, index) => (
+                  {kycByRegion.map((region, idx) => (
                     <TableRow 
-                      key={index}
-                      className="border-b border-[rgba(100,160,255,0.1)] hover:bg-white/[0.02]"
+                      key={idx}
+                      className={cn(
+                        "border-b border-[#E5E7EB] hover:bg-[#F3F4F6]",
+                        idx % 2 === 1 ? "bg-[#F9FAFB]" : "bg-white"
+                      )}
                     >
-                      <TableCell className="text-xs text-[#d0dff0]">{region.region}</TableCell>
-                      <TableCell className="text-xs text-[#d0dff0]">{region.total}</TableCell>
-                      <TableCell className="text-xs text-[#d0dff0]">{region.kyc}</TableCell>
-                      <TableCell style={{ color: region.rateColor }} className="text-xs">
+                      <TableCell className="text-xs text-[#111827]">{region.region}</TableCell>
+                      <TableCell className="text-xs text-[#111827]">{region.total}</TableCell>
+                      <TableCell className="text-xs text-[#111827]">{region.kyc}</TableCell>
+                      <TableCell style={{ color: region.rateColor }} className="text-xs font-mono">
                         {region.rate}
                       </TableCell>
                     </TableRow>

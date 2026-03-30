@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface KPICardProps {
@@ -9,55 +8,45 @@ interface KPICardProps {
   label: string;
   delta?: string;
   deltaType?: "up" | "down";
-  color: "lime" | "cyan" | "amber" | "green" | "purple" | "blue" | "red";
+  color: "teal" | "neutral" | "orange";
   index: number;
 }
 
 const colorMap = {
-  lime: "#a8ff3e",
-  cyan: "#38d9f5",
-  amber: "#ffb830",
-  green: "#2edc7a",
-  purple: "#c47aff",
-  blue: "#4a8eff",
-  red: "#ff4560",
+  teal: "#00D1FF",
+  neutral: "#111827",
+  orange: "#FF6B00",
 };
 
 export function KPICard({ tag, value, label, delta, deltaType, color, index }: KPICardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, delay: index * 0.1 }}
-      className="bg-[#111820] border border-[rgba(100,160,255,0.1)] rounded-xl p-4 cursor-pointer transition-colors duration-200 hover:border-[rgba(100,160,255,0.22)] relative overflow-hidden group"
+    <div
+      className="bg-white border border-[#111827] p-4 cursor-pointer transition-all duration-150 hover:border-[#00D1FF] relative overflow-hidden group"
     >
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none" />
-      
-      <div className="font-mono text-[8px] tracking-[0.18em] uppercase text-[#5a7090] mb-2">
+      <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-[#6B7280] mb-2">
         {tag}
       </div>
-      <div className="font-serif text-[26px] leading-none mb-1" style={{ color: colorMap[color] }}>
+      <div className="font-heading text-[24px] leading-none mb-1 text-[#111827]" style={{ color: colorMap[color] }}>
         {value}
       </div>
-      <div className="text-[11px] text-[#5a7090]">
+      <div className="text-[11px] text-[#6B7280]">
         {label}
       </div>
       {delta && (
         <div className={cn(
-          "text-[10px] mt-1 font-semibold",
-          deltaType === "up" ? "text-[#2edc7a]" : "text-[#ff4560]"
+          "text-[10px] mt-1 font-medium font-mono",
+          deltaType === "up" ? "text-[#111827]" : "text-[#FF6B00]"
         )}>
           {deltaType === "up" ? "▲" : "▼"} {delta}
         </div>
       )}
-      {/* Bottom bar */}
+      {/* Bottom accent line */}
       <div 
-        className="absolute bottom-0 left-0 right-0 h-0.5"
+        className="absolute bottom-0 left-0 right-0 h-[2px]"
         style={{ 
-          background: `linear-gradient(90deg, ${colorMap[color]}, transparent)` 
+          background: colorMap[color]
         }} 
       />
-    </motion.div>
+    </div>
   );
 }

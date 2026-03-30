@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 interface ChartCardProps {
   title: string;
   children: React.ReactNode;
@@ -10,18 +8,13 @@ interface ChartCardProps {
 
 export function ChartCard({ title, children, action }: ChartCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="bg-[#111820] border border-[rgba(100,160,255,0.1)] rounded-xl overflow-hidden"
-    >
-      <div className="px-4 py-3.5 border-b border-[rgba(100,160,255,0.1)] flex items-center justify-between">
-        <div className="text-[13px] font-bold text-[#d0dff0]">
+    <div className="bg-white border border-[#111827] overflow-hidden">
+      <div className="px-4 py-3 border-b border-[#111827] flex items-center justify-between bg-[#F9FAFB]">
+        <div className="text-[13px] font-semibold text-[#111827]">
           {title}
         </div>
         {action && (
-          <div className="font-mono text-[9px] tracking-[0.12em] uppercase text-[#5a7090] cursor-pointer transition-colors hover:text-[#a8ff3e]">
+          <div className="font-mono text-[10px] tracking-[0.1em] uppercase text-[#6B7280] cursor-pointer transition-colors hover:text-[#00D1FF]">
             {action}
           </div>
         )}
@@ -29,6 +22,6 @@ export function ChartCard({ title, children, action }: ChartCardProps) {
       <div className="p-4">
         {children}
       </div>
-    </motion.div>
+    </div>
   );
 }

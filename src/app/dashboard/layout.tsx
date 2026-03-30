@@ -10,12 +10,12 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex h-screen bg-[#070a0f] overflow-hidden">
+    <div className="flex h-screen bg-[#F9FAFB] overflow-hidden grid-background">
       <Sidebar />
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
         <Ticker />
         <Topbar />
-        <main className="flex-1 overflow-y-auto overflow-x-hidden p-5 px-6 scrollbar-thin scrollbar-thumb-[#1e2838] scrollbar-track-transparent">
+        <main className="flex-1 overflow-y-auto overflow-x-hidden p-6 scrollbar-thin scrollbar-thumb-[#D1D5DB] scrollbar-track-transparent">
           {children}
         </main>
       </div>
