@@ -33,3 +33,23 @@ export async function archiveVault(id: string) {
   await updateVault(id, { status: 'archived' })
   redirect('/vaults')
 }
+
+export async function reviewPoaEvent(vaultId: string, eventId: string, status: 'approved' | 'rejected') {
+  await adminFetch(`/admin/poa-events/${eventId}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ status }),
+  })
+  revalidatePath(`/vaults/${vaultId}`)
+}
+
+export async function reviewHarvestEvent(
+  vaultId: string,
+  eventId: string,
+  status: 'approved' | 'rejected',
+) {
+  await adminFetch(`/admin/harvest-events/${eventId}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ status }),
+  })
+  revalidatePath(`/vaults/${vaultId}`)
+}
